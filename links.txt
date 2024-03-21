@@ -1,0 +1,5 @@
+http://srm-api-3.azurewebsites.net/api/post/academia/posts (posts of the website)
+
+https://academia-s-2.azurewebsites.net (obtain user token)
+
+https://academai-s-3.azurewebsites.net
