@@ -1,5 +1,4 @@
 import argparse
-import sys
 from getpass import getpass
 from pprint import pprint
 
@@ -16,7 +15,7 @@ parser.add_argument("--password", type=str,
 parser.add_argument("--output", help="Outputs the data into a file", type=str)
 
 parser.add_argument(
-    "--json", choices=[0, 1], type=int, help="Enter 1 to output it as json")
+    "--json",  type=str, help="Enter json file name")
 args = parser.parse_args()
 username = args.username
 
@@ -30,19 +29,21 @@ else:
 
 
 token = get_token(username=username, password=password)
+print("[+] Obtained token")
 data = get_data(token_dict=token)
+print("[+] Data obtained")
 
 pprint(data)
 
 if args.json:
     import json
-    with open(args.output, mode="w", encoding='utf-8') as file:
+    with open(args.json, mode="w", encoding='utf-8') as file:
         json.dump(data, file)
 
-else:
-    if args.output:
-        with open(args.output, mode="w", encoding='utf-8') as file:
-            file.write(str(data))
+
+if args.output:
+    with open(args.output, mode="w", encoding='utf-8') as file:
+        file.write(str(data))
 
 
 # TODO: Account for errors such as 404, 302, 500, etc.
