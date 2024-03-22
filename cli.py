@@ -1,4 +1,5 @@
 import argparse
+import sys
 from getpass import getpass
 from pprint import pprint
 
@@ -20,8 +21,7 @@ args = parser.parse_args()
 username = args.username
 
 if not username:
-    print("Enter a username and continue")
-    exit()
+    username = input("Username: ")
 
 if not args.password:
     password = getpass()
