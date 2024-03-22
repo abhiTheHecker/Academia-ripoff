@@ -28,3 +28,4 @@ data = get_data(token_dict=token)
 pprint(data)
 
 # TODO: Account for errors such as 404, 302, 500, etc.
+# TODO: Web Interface and database models.
