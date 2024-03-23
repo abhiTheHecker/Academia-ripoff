@@ -30,5 +30,5 @@ def get_data(token_dict) -> dict:
     return dict(res.json())
 
 
-# token = get_token("av8421", "Abhi@2006")
+# token = get_token("netid", "password")
 # print(get_data(token_dict=token))
