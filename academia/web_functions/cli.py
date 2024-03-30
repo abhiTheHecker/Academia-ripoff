@@ -1,8 +1,8 @@
 import argparse
-from getpass import getpass
-from pprint import pprint
+from getpass import getpass as _getpass
+from pprint import pprint as _pprint
 
-from web import get_data, get_token
+from web import get_data, get_token  # Linter wrongly flags this as an error
 
 """This is the CLI for the Academia ripoff. It will provide all the obtainable details of a student in json/dictionary format"""
 
@@ -23,17 +23,17 @@ if not username:
     username = input("Username: ")
 
 if not args.password:
-    password = getpass()
+    password = _getpass()
 else:
     password = args.password
 
 
 token = get_token(username=username, password=password)
 print("[+] Obtained token")
-data = get_data(token_dict=token)
+data = get_data(token=token)
 print("[+] Data obtained")
 
-pprint(data)
+_pprint(data)
 
 if args.json:
     import json

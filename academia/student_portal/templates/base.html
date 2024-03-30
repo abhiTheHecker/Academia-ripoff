@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <title>{% block title %}Document {% endblock %}</title>
+    {% endblock %}
+</head>
+
+<body>
+    <ul class="navbar">
+        {% block navbar %}
+        <li class="navitems"><a href="{% url 'index'%}">Home</a></li>
+        <li class="navitems"><a href="{% url 'attendance'%}">Attendance</a></li>
+        <li class="navitems"><a href="{% url 'login'%}">Login</a></li>
+        <li class="navitems"><a href="{% url 'marks'%}">Marks</a></li>
+        <li class="navitems"><a href="{% url 'details'%}">Details</a></li>
+        {% endblock %}
+    </ul>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

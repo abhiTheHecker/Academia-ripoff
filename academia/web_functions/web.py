@@ -11,14 +11,16 @@ def get_token(username: str = "", password: str = "") -> dict:
     token_url = "https://academia-s-2.azurewebsites.net/login"
 
     res = requests.post(url=token_url, json=data, timeout=100)
-    token = res.json()
-    return token
+    if 'message' not in res.json():
+        token = res.json()
+        return token['token']
+    return False
 
 
-def get_data(token_dict) -> dict:
+def get_data(token) -> dict:
     """Input: The token(which is a dictionary btw) obtained from get_token\nOutput: Returns the academic data of the user in the form of a dictionary"""
     headers = {
-        "X-Access-Token": token_dict['token'],
+        "X-Access-Token": token,
         "Origin": "https://a.srmcheck.me",
         "Accept": "*/*",
         "Referer": "https://a.srmcheck.me/"
@@ -27,8 +29,13 @@ def get_data(token_dict) -> dict:
     url = "https://academia-s-2.azurewebsites.net/course-user"
 
     res = requests.post(url=url, headers=headers, timeout=100)
-    return dict(res.json())
+    if res.status_code == 200:
+        return dict(res.json())
+    return False
 
 
 # token = get_token("netid", "password")
-# print(get_data(token_dict=token))
+# if not token:
+#     print("Failex")
+# else:
+#     print(get_data(token=token))

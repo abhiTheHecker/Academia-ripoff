@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ block.super }}
+<style>
+    body {
+        text-align: center;
+    }
+
+    table {
+        text-align: center;
+        border: 2px solid black;
+    }
+
+    th {
+        background-color: grey;
+    }
+
+    td {
+        border: 2px solid black;
+    }
+</style>
+{% endblock %}
+
+{% block title %} Home {% endblock %}
+
+{% block navbar %}
+{{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<h1>Home Page</h1>
+<p>
+<table>
+    <tr>
+        <th>Field</th>
+        <th>Value</th>
+    </tr>
+    {% for key, value in details.items %}
+    <tr>
+        <td>{{ key.title }}</td>
+        <td>{{ value }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</p>
+{% endblock %}
