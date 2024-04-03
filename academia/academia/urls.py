@@ -18,7 +18,11 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     # now instead of typing app/index, we can just type /index
     path('', include('student_portal.urls')),
 ]
+
+ADMIN_ENABLED = False
+
+if ADMIN_ENABLED:
+    urlpatterns += [path('admin/', admin.site.urls),]
