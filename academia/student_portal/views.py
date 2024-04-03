@@ -10,7 +10,10 @@ def index(request):
     try:
         token = request.session['token']
         user_data = get_data(token=token)
-        context['details'] = user_data['user']
+        if user_data:
+            context['details'] = user_data['user']
+        else:
+            return redirect('login')
     except KeyError:
         return redirect('login')
     return render(request, "index.html", context=context)
@@ -39,8 +42,11 @@ def attendance(request):
     try:
         token = request.session['token']
         data = get_data(token=token)
-        attendance_data = data['courses']
-        context['attendance_data'] = attendance_data
+        if data:
+            attendance_data = data['courses']
+            context['attendance_data'] = attendance_data
+        else:
+            return redirect('error')
     except KeyError:
         return redirect('login')
     return render(request, "attendance.html", context=context)
@@ -52,20 +58,12 @@ def marks(request):
     context = {}
     try:
         token = request.session['token']
-        # print(token)
+        data = get_data(token)
+        in_marks = data['internal_marks']
+        context['internals'] = in_marks
     except KeyError:
         return redirect('login')
     return render(request, "marks.html", context=context)
-
-
-def details(request):
-    context = {}
-    try:
-        token = request.session['token']
-        # print(token)
-    except KeyError:
-        return redirect('login')
-    return render(request, "details.html", context=context)
 
 
 def error(request):
@@ -73,3 +71,4 @@ def error(request):
     return render(request, 'error.html', context=context)
 
 # TODO: Add the obtained data to the rest of the pages, like marks, timetable, and other things
+# TODO: Add requirements.txt file and poetry.lock and pyproject.toml

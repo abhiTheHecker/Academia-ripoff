@@ -2,6 +2,24 @@
 
 {% block head %}
 {{ block.super }}
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
 {% endblock %}
 
 {% block title %}
@@ -14,4 +32,24 @@ marks
 
 {% block content %}
 <h1>Marks</h1>
+<p>
+<table>
+    <tr>
+        <th>Subject Code</th>
+        <th>Category</th>
+        <th>Marks</th>
+    </tr>
+    {% for category in internals %}
+    <tr>
+        <td>{{ category.subject_code }}</td>
+        <td> {{ category.category }} </td>
+        <td>
+            {% for i in category.marks %}
+            <b style="color: black;">{{ i.0 }}</b> : <i> {{ i.1 }} </i><br>
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</p>
 {% endblock %}
